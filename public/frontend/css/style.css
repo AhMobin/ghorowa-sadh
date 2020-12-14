@@ -1,0 +1,249 @@
+.header_section{
+    width: 100%;
+}
+
+.header_section .top_header {
+    background-color: darkslategrey;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.header_section .top_header .top_header_left{
+    float: left;
+    margin-left: 25px;
+}
+
+.header_section .top_header .top_header_left a i{
+    color: #fff;
+    margin-right: 15px;
+}
+
+.header_section .top_header .top_header_right{
+    float: right;
+    margin-right: 25px;
+}
+
+.header_section .top_header .top_header_right a{
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.header_section .top_header .top_header_right a:first-child{
+    margin-right: 20px;
+}
+
+
+
+.banner_section{
+    background-image: url('../images/unnamed.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 60vh;
+}
+
+.banner_section .banner_content{
+    width: 75%;
+    margin: auto;
+    background-color: rgba(0,0,0,0.5);
+    padding: 15px;
+}
+
+.banner_section .banner_content h1{
+    text-align: center;
+    color: #fff;
+    padding-top: 50px;
+}
+
+.banner_section .banner_content p{
+    text-align: center;
+    color: #fff; 
+}
+
+.section_heading{
+    font-weight: 800;
+    color: #444;
+}
+
+.seller_profile .card {
+    margin-top: 20px;
+}
+.seller_profile .card img{
+    height: 150px;
+}
+
+.category_section a{
+    color: #222;
+    text-decoration: none; 
+}
+
+.category_section a:hover{
+    color: #2F4F4F;
+}
+
+.category_section a .card{
+    margin: 20px;
+}
+
+.category_section .all_cat_btn{
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-top: 15px;
+    color: #fff;
+}
+
+.footer_section{
+    background-color: #2F4F4F;
+    padding-top: 30px;
+    padding-top: 30px;
+}
+
+.footer_section ul {
+    list-style: none;
+}
+
+.footer_section ul li{
+    margin-bottom: 15px;
+}
+
+.footer_section ul li a{
+    text-decoration: none;
+    color: #fff;
+    transition: 1s;
+}
+
+.footer_section ul li a:hover{
+    padding-left: 10px;
+    transition: 1s;
+    font-weight: 700;
+    
+}
+
+.footer_section ul li form input{
+    padding: 6px;
+    border-radius: 10px;
+}
+
+.copyright{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    line-height: 0;
+    background-color: #343A40;
+    text-align: center;
+    color: #fff;
+}
+
+
+.profile{
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+.profile .profile_top_section{
+    text-align: center;
+}
+
+.profile .profile_desc i{
+    margin-left: 25px;
+    font-weight: 500;
+    color: #444;
+}
+
+.profile .profile_desc span{
+    font-weight: 500;
+    color: #444;
+}
+
+.profile img{
+    width: 150px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+.skills_n_desc{
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 3px;    
+}
+
+.skills_n_desc h6{
+    font-weight: 600;
+}
+
+.skills_n_desc .skills, .skills_n_desc .desc{
+    margin-left: 10px;
+}
+
+.skills_n_desc li, .skills_n_desc p {
+    color: #444;
+}
+
+.seller_project_gallery h2{
+    text-align: center;
+    border-left: 5px solid #218838;
+    border-right: 5px solid #218838;
+    background: rgba(0,0,0,0.05);
+    padding: 3px;
+    margin-bottom: 30px;
+}
+
+.seller_project_gallery .gallery .img{
+    border: 4px solid #2F4F4F;
+    padding: 5px;
+    margin: 5px;
+    transition: 0.8s;
+}
+
+.seller_project_gallery .gallery .img a img:hover{
+    transform: scale(1.01);
+    transition: 0.8s;
+}
+
+@media only screen and (max-width: 766px) {
+    .seller_project_gallery{
+        margin-top: 25px;
+    }
+}
+
+.categories h4{
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.categories ul{
+    width: 75%;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.categories ul li{
+    padding: 0 0 10px 0px;
+    border-bottom: 1px solid lightgray;
+}
+
+.categories ul li a{
+    text-decoration: none;
+    color: #333;
+    text-transform: capitalize;
+    transition: 1s;
+}
+
+.categories ul li a:hover{
+    padding-left: 15px;
+    transition: 1s;
+    color: #222;
+}
+
+.category_profile .card{
+    margin-top: 20px;
+}
+.category_profile .card img{
+    height: 150px;
+}
