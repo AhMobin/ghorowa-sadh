@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\UsersController;
+use App\Http\Controllers\Frontend\PageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,19 +15,40 @@ use App\Http\Controllers\Backend\UsersController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+/************** */
+//frontend
+/************** */
+
+Route::get('/',[PageController::class,'index'])->name('index');
+
+Route::get('sellers/{category}',[PageController::class,'categorySellers']);
+
+
+
+
+
+
+
+
+/************** */
+//backend
+/************** */
+
+Route::get('/dashboard', [UsersController::class,'profile'])->name('dashboard');
+Route::get('/update/profile/{user}', [UsersController::class,'updateProfile']);
+Route::post('update/profile', [UsersController::class,'profileUpdate']);
+Route::post('update/skills', [UsersController::class,'updateSkills']);
+Route::post('add/portfolio', [UsersController::class,'addPortfolio']);
 
 
 Route::get('categories',[CategoryController::class,'index'])->name('category')->middleware(['auth']);
 Route::post('category/store',[CategoryController::class,'store'])->name('category.store')->middleware(['auth']);
 
+Route::get('all/users',[UsersController::class,'allUsers'])->name('users');
 
 
-Route::get('all/users',[UsersController::class,'index'])->name('users');
 require __DIR__.'/auth.php';

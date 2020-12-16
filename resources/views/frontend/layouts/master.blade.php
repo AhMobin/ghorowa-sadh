@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
@@ -19,12 +19,20 @@
             </div>
 
             <div class="top_header_right">
+              @auth
+                  <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              @else
                 <a href="">Sign Up</a>
                 <a href="">Sign In</a>
+              @endauth
             </div>
         </div>
 
-        <div class="main_nav">
+        {{-- <div class="main_nav"> --}}
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="#" style="font-size: 30px; margin-left: 20px;">Logo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,11 +52,9 @@
                         Our Categories
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Category One</a>
-                        <a class="dropdown-item" href="#">Category Two</a>
-                        <a class="dropdown-item" href="#">Category Three</a>
-                        <a class="dropdown-item" href="#">Category Four</a>
-                        <a class="dropdown-item" href="#">Category Five</a>
+                        @foreach(App\Models\Category::select('category_name','category_slug')->get() as $category)
+                          <a class="dropdown-item" href="{{ 'sellers/'.$category->category_slug }}">{{ $category->category_name }}</a>
+                        @endforeach
                       </div>
                     </li>
                     <li class="nav-item">
@@ -65,209 +71,10 @@
                   </form>
                 </div>
               </nav>
-        </div>
+        {{-- </div> --}}
     </header>
 
-    <div class="banner_section">
-        <div class="banner_content">
-            <h1>Lorem ipsum dolor sit amet.</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum necessitatibus non soluta sit quo veniam explicabo voluptatum, molestias dicta delectus quas minus ipsum dolor dignissimos.</p>
-        </div>
-    </div>
-
-
-    <section class="seller_profile mt-5">
-        <h3 class="text-center section_heading">Top Rated Sellers</h3>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <div class="card" style="width: 230px">
-                        <img src="images/avatar.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Seller User Name</h5>
-                          <p>Lorem ipsum dolor sit amet.</p>
-                          <a href="#" class="btn btn-primary">view profile</a>
-                        </div>
-                      </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="category_section mt-5">
-        <h3 class="text-center section_heading">Our Categories</h3>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="images/category.png" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-text">Category Name</h5>
-                            </div>
-                          </div>
-                    </a>
-                </div>
-            </div>
-
-            <a href="" class="all_cat_btn btn btn-danger">View All Category</a>
-        </div>
-    </section>
+    @yield('main')
 
 
     <footer class="mt-5">
