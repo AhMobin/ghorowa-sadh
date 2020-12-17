@@ -8,8 +8,10 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\SellerSkill;
 use App\Models\Portfolio;
+use App\Models\UserDescription;
 use Auth;
 use DB;
+use Storage;
 
 class UsersController extends Controller
 {
@@ -53,26 +55,70 @@ class UsersController extends Controller
 
 
     public function profileUpdate(Request $request){
-
-        $userImage = $request->file('avatar')->store('public/users/avatar');
-        $imgPathOne = explode('/',$userImage)[1];
-        $imgPathTwo = explode('/',$userImage)[2];
-        $imgPathThree = explode('/',$userImage)[3];
         $host = $_SERVER['HTTP_HOST'];
-        $avatarLocation = "http://".$host."/storage/".$imgPathOne."/".$imgPathTwo."/".$imgPathThree;
+        if($request->hasFile('avatar')){
+            if(Auth::user()->avatar){
+                $oldAvatar = $request->oldAvatar;
+                $getoldAvatar = explode('/',$oldAvatar);
+                $lastgetoldAvatar = 'public/users/avatar/'.end($getoldAvatar);
+                Storage::delete($lastgetoldAvatar);
+    
+                $avatarPath = $request->file('avatar')->store('public/users/avatar');
+                $avatarPathOne = explode('/',$avatarPath)[1];
+                $avatarPathTwo = explode('/',$avatarPath)[2];
+                $avatarPathThree = explode('/',$avatarPath)[3];
+    
+                $avatarLocation = "http://".$host."/storage/".$avatarPathOne."/".$avatarPathTwo."/".$avatarPathThree;
+
+                User::where('id',Auth::id())->update([
+                    'avatar' => $avatarLocation,
+                ]);
+            
+            }else{
+                $userImage = $request->file('avatar')->store('public/users/avatar');
+                $imgPathOne = explode('/',$userImage)[1];
+                $imgPathTwo = explode('/',$userImage)[2];
+                $imgPathThree = explode('/',$userImage)[3];
+                $avatarLocation = "http://".$host."/storage/".$imgPathOne."/".$imgPathTwo."/".$imgPathThree;
+                
+                User::where('id',Auth::id())->update([
+                    'avatar' => $avatarLocation,
+                ]);
+            
+            }
+        }
 
         $update = User::where('id',Auth::id())->update([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
             'type' => $request->type,
-            'avatar' => $avatarLocation,
         ]);
 
         session()->flash('success','Successfully Profile Updated');
         return back();
     }
 
-    public function updateSkills(Request $request){
+
+    public function addDescription(Request $request){
+        UserDescription::create([
+            'user_id' => Auth::id(),
+            'user_descriptions' => $request->user_descriptions
+        ]);
+
+        session()->flash('description','Successfully Description Inserted');
+        return back();
+    }
+
+    public function updateDescription(Request $request){
+        UserDescription::where('user_id',Auth::id())->update([
+            'user_descriptions' => $request->user_descriptions
+        ]);
+
+        session()->flash('description','Successfully Description Updated');
+        return back();
+    }
+
+    public function addSkills(Request $request){
         $skills = $request->category_slug;
 
         if(count($skills) >= 6){

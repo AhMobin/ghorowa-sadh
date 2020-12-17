@@ -19,21 +19,13 @@
                             
                             
                             <h4>{{ $user->name }}</h4>
-                            <p>Expert in Clothing</p>
-                            <a href="" class="btn btn-success w-75 btn-sm">Contact Me</a>
+
+                            {{-- <a href="" class="btn btn-success w-75 btn-sm">Contact Me</a> --}}
                             <hr>
                                 @if($user->name_uri == Auth::user()->name_uri && $checkSkills > 0)
-                                <a href="{{ url('update/profile/'.$user->name_uri) }}" class="btn btn-warning w-75 btn-sm">Edit Profile</a>
+                                <a href="{{ url('update/profile/'.$user->name_uri) }}" class="btn btn-warning w-75 btn-sm mb-3">Edit Profile</a>
                                 @endif
-                            <hr>
                         </div>
-
-                        <div class="profile_desc">
-                            <p><i class="fa fa-map-marker"></i> <span>From</span> <strong class="float-right" style="margin-right: 25px;">Dhaka</strong></p>
-                            <p><i class="fa fa-map-marker"></i> <span>Member Since</span> <strong class="float-right" style="margin-right: 25px;">January 2021</strong></p>
-                            <p><i class="fa fa-map-marker"></i> <span>Hourly Rate</span> <strong class="float-right" style="margin-right: 25px;">BDT 10</strong></p>
-                        </div>
-
                     </div>
 
                     <div class="skills_n_desc">
@@ -53,7 +45,17 @@
 
                         <div class="desc">
                             <h6>Description :-</h6>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia recusandae rem quos, odit quisquam at reiciendis blanditiis voluptates perspiciatis quas.</p>
+                            @php
+                                $count = App\Models\UserDescription::where('user_id',Auth::id())->count();
+                                $desc = App\Models\UserDescription::where('user_id',Auth::id())->first();
+                            @endphp
+                            
+                            @if($count > 0)
+                                <p>{{ $desc->user_descriptions }}</p>
+                            @else
+                                <p>Please Add Your Description from Edit Profile</p>
+                            @endif
+                        
                         </div>
 
                     </div>
@@ -123,7 +125,7 @@
                                 </div>
                             @endif
 
-                            <form action="{{ url('update/skills') }}" method="post">
+                            <form action="{{ url('add/skills') }}" method="post">
                                 @csrf
                 
                                 <label for="skillsCategory">Select Your Skill Category:</label><br>

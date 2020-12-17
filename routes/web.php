@@ -24,6 +24,7 @@ use App\Http\Controllers\Frontend\PageController;
 /************** */
 
 Route::get('/',[PageController::class,'index'])->name('index');
+Route::get('/profile/{user}', [PageController::class,'userProfile']);
 
 Route::get('sellers/{category}',[PageController::class,'categorySellers']);
 
@@ -41,7 +42,9 @@ Route::get('sellers/{category}',[PageController::class,'categorySellers']);
 Route::get('/dashboard', [UsersController::class,'profile'])->name('dashboard');
 Route::get('/update/profile/{user}', [UsersController::class,'updateProfile']);
 Route::post('update/profile', [UsersController::class,'profileUpdate']);
-Route::post('update/skills', [UsersController::class,'updateSkills']);
+Route::post('add/user/description', [UsersController::class,'addDescription']);
+Route::post('update/user/description', [UsersController::class,'updateDescription']);
+Route::post('add/skills', [UsersController::class,'addSkills']);
 Route::post('add/portfolio', [UsersController::class,'addPortfolio']);
 
 

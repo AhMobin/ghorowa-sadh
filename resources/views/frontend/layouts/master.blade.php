@@ -20,6 +20,7 @@
 
             <div class="top_header_right">
               @auth
+                <a href="{{ route('dashboard') }}">Profile</a>
                   <a href="{{ route('logout') }}"  onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -34,7 +35,7 @@
 
         {{-- <div class="main_nav"> --}}
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#" style="font-size: 30px; margin-left: 20px;">Logo</a>
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 30px; margin-left: 20px;">Logo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>

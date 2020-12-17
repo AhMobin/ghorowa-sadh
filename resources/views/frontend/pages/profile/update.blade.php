@@ -69,6 +69,7 @@
                 <div class="form-group">
                     <label for="userAvatar">Avatar:</label><br>
                     <input type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar">
+                    <input type="hidden" name="oldAvatar" value={{ $userValue->avatar }}>
                     
                     @error('avatar')
                         <span class="invalid-feedback" role="alert">
@@ -81,9 +82,54 @@
                 <button type="submit" class="btn btn-info">Update</button>
 
             </form>
+
+            <a href="{{ route('dashboard') }}" class="btn btn-warning mt-5">Back</a>
         </div>
 
+
+        @if(Auth::user()->type == 'seller')
+
+            <div class="col-md-6 col-lg-6 col-12">
+                <h5 class="mb-5 text-center">Update Profile Description...</h5>
+
+                @if(session()->has('description'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session()->get('description') }}                    
+                    </div>
+                @endif
+
+                @php
+                    $count = App\Models\UserDescription::where('user_id',$userValue->id)->count();
+                    $desc = App\Models\UserDescription::where('user_id',$userValue->id)->first();
+                @endphp
+
+                
+                @if($count < 1)
+                    <form action="{{ url('add/user/description') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <textarea name="user_descriptions" class="form-control"></textarea>
+                        </div>
+                        <button class="btn btn-success" type="submit">Add Description</button>
+                    </form>
+                @else
+
+                    
+                    <form action="{{ url('update/user/description') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <textarea name="user_descriptions" class="form-control">{{ $desc->user_descriptions }}</textarea>
+                        </div>
+                        <button class="btn btn-success" type="submit">Update Description</button>
+                    </form>
+                
+                @endif
+            
+            </div>
+        @endif    
+        
     </div>
+    
 </div>
 
 
