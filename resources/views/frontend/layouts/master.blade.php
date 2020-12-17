@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        {{-- <div class="main_nav"> --}}
+        <div class="main_nav">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 30px; margin-left: 20px;">Logo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @foreach(App\Models\Category::select('category_name','category_slug')->get() as $category)
-                          <a class="dropdown-item" href="{{ 'sellers/'.$category->category_slug }}">{{ $category->category_name }}</a>
+                          <a class="dropdown-item" href="{{ url('all/sellers/'.$category->category_slug) }}">{{ $category->category_name }}</a>
                         @endforeach
                       </div>
                     </li>
@@ -72,7 +72,7 @@
                   </form>
                 </div>
               </nav>
-        {{-- </div> --}}
+        </div>
     </header>
 
     @yield('main')

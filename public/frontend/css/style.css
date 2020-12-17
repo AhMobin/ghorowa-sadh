@@ -94,6 +94,10 @@
     color: #fff;
 }
 
+.category_section .all_cat_btn:hover{
+    color: #fff;
+}
+
 .footer_section{
     background-color: #2F4F4F;
     padding-top: 30px;

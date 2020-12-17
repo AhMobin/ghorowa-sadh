@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Frontend\PageController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +25,10 @@ use App\Http\Controllers\Frontend\PageController;
 /************** */
 
 Route::get('/',[PageController::class,'index'])->name('index');
+Route::get('all/categories',[PageController::class,'categories'])->name('all.category');
 Route::get('/profile/{user}', [PageController::class,'userProfile']);
 
-Route::get('sellers/{category}',[PageController::class,'categorySellers']);
+Route::get('all/sellers/{category}',[PageController::class,'categorySellers']);
 
 
 

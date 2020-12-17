@@ -12,5 +12,8 @@ class SellerSkill extends Model
 
     protected $guarded = [];
 
+    public function seller(){
+        return $this->hasMany(User::class);
+    }
 
 }

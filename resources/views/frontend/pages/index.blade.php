@@ -13,97 +13,28 @@
 
 <section class="seller_profile mt-5">
     <h3 class="text-center section_heading">Top Rated Sellers</h3>
+    
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
-                  </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
-                  </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
-                  </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
+            
+          @foreach($sellers as $seller)
+        
+          <div class="col-md-3 col-lg-3 col-sm-6 col-12">
+              <div class="card" style="width: 230px">
+                <img src="{{ $seller->avatar }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ $seller->name }}</h5>
+                  <p>Lorem ipsum dolor sit amet.</p>
+                  <a href="{{ url('profile/'.$seller->name_uri) }}" class="btn btn-primary">view profile</a>
                 </div>
-            </div>
+              </div>
+          </div>
+          @endforeach
 
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
-                  </div>
-            </div>
 
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
-                  </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
-                  </div>
-            </div>
-
-            <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                <div class="card" style="width: 230px">
-                    <img src="images/avatar.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Seller User Name</h5>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <a href="#" class="btn btn-primary">view profile</a>
-                    </div>
-                  </div>
-            </div>
         </div>
     </div>
+
 </section>
 
 
@@ -115,7 +46,7 @@
             @foreach($categories as $category)
 
                 <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="{{ 'sellers/'.$category->category_slug }}">
+                    <a href="{{ url('all/sellers/'.$category->category_slug) }}">
                         <div class="card">
                             <img class="card-img-top" src="{{ $category->category_thumb }}" alt="">
                             <div class="card-body">
@@ -129,7 +60,7 @@
 
         </div>
 
-        <a href="" class="all_cat_btn btn btn-danger">View All Category</a>
+        <a href="{{ route('all.category') }}" class="all_cat_btn btn btn-danger">View All Category</a>
     </div>
 </section>
 

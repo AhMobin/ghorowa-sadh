@@ -20,7 +20,7 @@
                             
                             <h4>{{ $user->name }}</h4>
                             <hr>   
-                            <a href="" class="btn btn-success w-75 btn-sm mb-3">Contact Me</a>
+                            <a href="" class="btn btn-success w-75 btn-sm mb-3">Message Me</a>
                         </div>
                     </div>
 
