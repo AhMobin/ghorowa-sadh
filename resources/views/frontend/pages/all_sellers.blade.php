@@ -14,7 +14,7 @@
                         <img src="{{ $seller->avatar }}" class="card-img-top" alt="...">
                         <div class="card-body">
                         <h5 class="card-title">{{ $seller->name }}</h5>
-                        <p>Total Tasks On {{ $seller_category->category_name }} : 12</p>
+                        <p>Total Tasks On {{ $seller_category->category_name }} : {{ App\Models\Portfolio::where('category_slug',$seller->category_slug)->where('user_id',$seller->user_id)->count() }}</p>
                         <a href="{{ url('profile/'.$seller->name_uri) }}" class="btn btn-primary">view profile</a>
                         </div>
                     </div>

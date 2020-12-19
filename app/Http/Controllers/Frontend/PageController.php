@@ -27,7 +27,8 @@ class PageController extends Controller
 
     public function categorySellers($category){
         $seller_category = Category::where('category_slug',$category)->first();
-        $sellers = DB::table('seller_skills')->join('users','seller_skills.user_id','users.id')->select('seller_skills.category_name','seller_skills.category_slug','users.name','users.name_uri','users.avatar')->where('seller_skills.category_slug',$category)->get();
+        $sellers = DB::table('seller_skills')->join('users','seller_skills.user_id','users.id')->select('seller_skills.category_name','seller_skills.category_slug','seller_skills.user_id','users.name','users.name_uri','users.avatar')->where('seller_skills.category_slug',$category)->get();
+        // $countTotalTaskOnCategory = ;
         return view('frontend.pages.all_sellers',compact('sellers','seller_category'));
     }
 
@@ -40,5 +41,10 @@ class PageController extends Controller
 
         return view('frontend.pages.profile.view_profile',compact('user','portfolios','skills','sellerDescs'));
        
+    }
+
+
+    public function messageToSeller(){
+        return view('frontend.pages.message');
     }
 }

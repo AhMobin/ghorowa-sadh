@@ -30,7 +30,7 @@ Route::get('/profile/{user}', [PageController::class,'userProfile']);
 
 Route::get('all/sellers/{category}',[PageController::class,'categorySellers']);
 
-
+Route::get('message/to/seller/',[PageController::class,'messageToSeller']);
 
 
 
