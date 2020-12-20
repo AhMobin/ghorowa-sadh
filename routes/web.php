@@ -23,7 +23,7 @@ use App\Http\Controllers\Frontend\PageController;
 /************** */
 //frontend
 /************** */
-
+Route::get('search',[PageController::class,'search']);
 Route::get('/',[PageController::class,'index'])->name('index');
 Route::get('all/categories',[PageController::class,'categories'])->name('all.category');
 Route::get('/profile/{user}', [PageController::class,'userProfile']);
@@ -32,10 +32,12 @@ Route::get('all/sellers/{category}',[PageController::class,'categorySellers']);
 
 Route::get('message/to/seller/',[PageController::class,'messageToSeller']);
 
-
-
-
-
+Route::post('hire/{seller}',[PageController::class,'hireASeller']);
+Route::get('approve/{id}',[PageController::class,'approvedBuyerRequest'])->middleware(['auth']);
+Route::get('deny/{id}',[PageController::class,'denyBuyerRequest'])->middleware(['auth']);
+Route::get('deliver/{id}',[PageController::class,'orderDeliver'])->middleware(['auth']);
+Route::get('cancel/by/seller/{id}',[PageController::class,'orderCancelBySeller'])->middleware(['auth']);
+Route::get('cancel/by/buyer/{id}',[PageController::class,'orderCancelByBuyer'])->middleware(['auth']);
 
 /************** */
 //backend

@@ -12,16 +12,24 @@
                     <div class="profile">
                         <div class="profile_top_section">
                             <img src="{{ $user->avatar }}" alt="" id="imgPreview" class="img-fluid">
-                            <div>
-                                <span id="pressOk" class="btn btn-sm btn-info w-25 float-left" style="display:none">OK</span>
-                                <span id="pressCancel" class="btn btn-sm btn-danger w-25 float-right" style="display:none">Cancel</span>
-                            </div>
-                            
-                            
+
                             <h4>{{ $user->name }}</h4>
                             <hr>
-                            @if($user->type == 'seller')   
-                            <a href="{{ url('hire') }}" class="btn btn-success w-75 btn-sm mb-3">Hire Me</a>
+                            @if($user->type == 'seller') 
+                            @if(session()->has('login-first'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session()->get('login-first') }}                    
+                            </div>
+                            @endif
+                            @if(session()->has('hired'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session()->get('hired') }}                    
+                            </div>
+                            @endif
+                            @if($user->id != Auth::id())
+                            <a class="btn btn-success w-75 btn-sm mb-3" data-toggle="modal" data-target="#hireSeller">Hire Me</a>
+                            @endif
+                            
                             @endif
                         </div>
                     </div>
@@ -69,6 +77,7 @@
                     </div>
                 </div>
                 @endif
+                
             </div>
         </div>
     </div>
@@ -97,5 +106,38 @@
 @endforeach
 
 
+<!-- Hire Seller Modal -->
+<div class="modal fade" id="hireSeller" tabindex="-1" role="dialog" aria-labelledby="hireSellerTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="hireSellerTitle">Hire This Seller</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            @if(Auth::check())
+            <form action="{{ url('hire/'.$user->name_uri) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="orderDescription">Write Order Description:</label>
+                    <textarea name="order_description" class="form-control" required></textarea>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-success btn-sm">Place Order</button>
+                </div>
+            </form>
+            @else
+            <div class="alert alert-danger" role="alert">
+                PLEASE LOGIN FIRST            
+            </div>
+            @endif
+                
+        </div>
+    </div>
+    </div>
+</div>
 
 @endsection

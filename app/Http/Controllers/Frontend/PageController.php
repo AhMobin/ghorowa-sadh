@@ -9,13 +9,31 @@ use App\Models\Category;
 use App\Models\Portfolio;
 use App\Models\SellerSkill;
 use App\Models\UserDescription;
+use App\Models\HireSeller;
 use DB;
+use Auth;
+use Crypt;
+
 class PageController extends Controller
 {
     public function index(){
         $categories = Category::select('category_name','category_slug','category_thumb')->take(4)->get();
         $sellers = User::select('name','name_uri','avatar')->where('type','seller')->get();
         return view('frontend.pages.index',compact('categories','sellers'));
+    }
+
+
+    public function search(){
+        $search = $_GET['search'];
+        $searchResult = DB::table('seller_skills')
+                        ->join('users','seller_skills.user_id','users.id')
+                        ->select('seller_skills.*','users.name','users.name_uri','users.avatar')
+                        ->where('category_name','LIKE','%'.$search.'%')
+                        ->orWhere('category_slug','LIKE','%'.$search.'%')
+                        ->orWhere('users.name','LIKE','%'.$search.'%')
+                        ->get();
+        
+        return view('frontend.pages.search',compact('searchResult','search'));
     }
 
 
@@ -47,4 +65,66 @@ class PageController extends Controller
     public function messageToSeller(){
         return view('frontend.pages.message');
     }
+
+
+    public function hireASeller(Request $request, $seller){
+        $sellerId = User::where('name_uri',$seller)->first();
+        $buyerId = Auth::id();
+        if(Auth::check()){
+            $request->validate([
+                'order_description' => 'required',
+            ]);
+            $hire = HireSeller::create([
+                'buyer_id' => $buyerId,
+                'seller_id' => $sellerId->id,
+                'order_description' => $request->order_description,
+            ]);
+            session()->flash('hired','Your Request Is Sent To Seller');
+            return back();
+        }else{
+            session()->flash('login-first','Please Login First');
+            return back();
+        }
+    }
+
+    public function approvedBuyerRequest($id){
+        $orderId = Crypt::decrypt($id);
+        HireSeller::where('id',$orderId)->update(['status' => 'in queue']);
+        session()->flash('approved','Approved Order');
+        return back();
+    }
+
+
+    public function denyBuyerRequest($id){
+        $orderId = Crypt::decrypt($id);
+        HireSeller::where('id',$orderId)->update(['status' => 'denied']);
+        session()->flash('deny','Orded Denied');
+        return back();
+    }
+
+
+    public function orderDeliver($id){
+        $orderId = Crypt::decrypt($id);
+        HireSeller::where('id',$orderId)->update(['status' => 'delivered']);
+        session()->flash('delivered','Orded Delivered');
+        return back();
+    }
+
+
+    public function orderCancelBySeller($id){
+        $orderId = Crypt::decrypt($id);
+        HireSeller::where('id',$orderId)->update(['status' => 'canceled by seller']);
+        session()->flash('cancel','Order Canceled');
+        return back();
+    }
+
+
+    public function orderCancelByBuyer($id){
+        $orderId = Crypt::decrypt($id);
+        HireSeller::where('id',$orderId)->update(['status' => 'canceled by buyer']);
+        session()->flash('cancel','Order Canceled');
+        return back();
+    }
+
+    
 }

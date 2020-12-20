@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\SellerSkill;
 use App\Models\Portfolio;
 use App\Models\UserDescription;
+use App\Models\hireSeller;
 use Auth;
 use DB;
 use Storage;
@@ -30,15 +31,17 @@ class UsersController extends Controller
             $categories = Category::select('category_name','category_slug')->get();
             $portfolios = Portfolio::where('user_id',$user->id)->get();
             $checkSkills = SellerSkill::where('user_id',Auth::id())->count();
+            $orders = HireSeller::where('seller_id',$user->id)->orderBy('id','desc')->paginate(5);
             if($checkSkills>0){
                 $skills = SellerSkill::where('user_id',Auth::id())->get();
-                return view('frontend.pages.profile.seller',compact('user','checkSkills','categories','skills','portfolios'));
+                return view('frontend.pages.profile.seller',compact('user','checkSkills','categories','skills','portfolios','orders'));
             }else{
                 return view('frontend.pages.profile.seller',compact('user','checkSkills','categories'));
             }
             
         }else if($user->type == 'buyer'){
-            return view('frontend.pages.profile.buyer',compact('user'));
+            $orders = HireSeller::where('buyer_id',$user->id)->get();
+            return view('frontend.pages.profile.buyer',compact('user','orders'));
         }
     }
 

@@ -12,7 +12,7 @@
 
 
 <section class="seller_profile mt-5">
-    <h3 class="text-center section_heading">Top Rated Sellers</h3>
+    <h3 class="text-center section_heading">Sellers</h3>
     
     <div class="container">
         <div class="row">
@@ -24,8 +24,7 @@
                 <img src="{{ $seller->avatar }}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{ $seller->name }}</h5>
-                  <p>Lorem ipsum dolor sit amet.</p>
-                  <a href="{{ url('profile/'.$seller->name_uri) }}" class="btn btn-primary">view profile</a>
+                  <a href="{{ url('profile/'.$seller->name_uri) }}" class="btn-sm btn btn-primary">view profile</a>
                 </div>
               </div>
           </div>

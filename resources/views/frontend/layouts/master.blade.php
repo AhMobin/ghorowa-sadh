@@ -27,8 +27,8 @@
                   @csrf
                 </form>
               @else
-                <a href="">Sign Up</a>
-                <a href="">Sign In</a>
+                <a href="{{ route('login') }}">Log In</a>
+                <a href="{{ route('register') }}">Join Us</a>
               @endauth
             </div>
         </div>
@@ -48,7 +48,7 @@
                     <li class="nav-item">
                       <a class="nav-link" href="#">About</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Our Categories
                       </a>
@@ -57,17 +57,17 @@
                           <a class="dropdown-item" href="{{ url('all/sellers/'.$category->category_slug) }}">{{ $category->category_name }}</a>
                         @endforeach
                       </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="#">Blogs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="#">Support</a>
                     </li>
                   </ul>
 
-                  <form class="form-inline ml-4 my-2 my-lg-0" style="margin-right: 20px;">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <form class="form-inline ml-4 my-2 my-lg-0" method="GET" action="{{ url('search') }}" style="margin-right: 20px;">
+                    <input class="form-control mr-sm-2" name="search" type="search" placeholder="search by category" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                   </form>
                 </div>
@@ -85,7 +85,7 @@
                     <div class="col-md-6 col-lg-6 col-sm-12 col-12">
                         <ul>
                             <li><a href="">About Us</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="">Support</a></li>
                             <li><a href="">Help Desk</a></li>
                         </ul>
                     </div>

@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title','Seller Profile')
+@section('title','Buyer Profile')
 
 @section('main')
 
@@ -12,11 +12,6 @@
                     <div class="profile">
                         <div class="profile_top_section">
                             <img src="{{ $user->avatar }}" alt="" id="imgPreview" class="img-fluid">
-                            <div>
-                                <span id="pressOk" class="btn btn-sm btn-info w-25 float-left" style="display:none">OK</span>
-                                <span id="pressCancel" class="btn btn-sm btn-danger w-25 float-right" style="display:none">Cancel</span>
-                            </div>
-                            
                             
                             <h4>{{ $user->name }}</h4>
 
@@ -29,7 +24,78 @@
                 </div>
 
                 <div class="col-md-6 col-lg-8 col-sm-12 col-12">
-                    
+                    <h4>Order List</h4><br>
+                        <div class="seller_project_gallery">
+                            <table class="table table-bordered text-center">
+                                <tr>
+                                    <th>Seller Name</th>
+                                    <th>Contact</th>
+                                    <th>Order Description</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+    
+                                @forelse($orders as $order)
+                                @if($order->status == 'requested')
+                                    <tr style="background: #62929a; color: #fff">
+                                        <td><a href="{{ url('profile/'.$order->seller->name_uri) }}" style="color: #fff">{{ $order->buyer->name }}</a></td>
+                                        <td class="text-capitalize">{{ $order->seller->phone_number }}</td>
+                                        <td class="text-capitalize">{{ $order->order_description }}</td>
+                                        <td class="text-capitalize">{{ $order->status }}</td>
+                                        <td>
+                                            <a href="{{ url('cancel/by/buyer/'.Crypt::encrypt($order->id)) }}" style="color: #fff; margin-left: 10px"><i class="fa fa-thumbs-down" title="cancel order"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    @elseif($order->status == 'in queue')
+                                    <tr style="background: #0d8abc; color: #fff">
+                                        <td><a href="" style="color:#fff">{{ $order->buyer->name }}</a></td>
+                                        <td class="text-capitalize">{{ $order->buyer->phone_number }}</td>
+                                        <td class="text-capitalize">{{ $order->order_description }}</td>
+                                        <td class="text-capitalize">{{ $order->status }}</td>
+                                        <td>
+                                            <span> -- </span>
+                                        </td>
+                                    </tr>
+
+                                    @elseif($order->status == 'delivered')
+                                    <tr style="background: #0da574; color: #fff">
+                                        <td><a href="" style="color: #fff">{{ $order->buyer->name }}</a></td>
+                                        <td class="text-capitalize">{{ $order->buyer->phone_number }}</td>
+                                        <td class="text-capitalize">{{ $order->order_description }}</td>
+                                        <td class="text-capitalize">{{ $order->status }}</td>
+                                        <td>
+                                            <span> -- </span>
+                                        </td>
+                                    </tr>
+                                    @elseif($order->status == 'canceled by seller' || $order->status == 'canceled by buyer')
+                                    <tr style="background: #f23557; color: #fff">
+                                        <td><a href="" style="color: #fff">{{ $order->buyer->name }}</a></td>
+                                        <td class="text-capitalize">{{ $order->buyer->phone_number }}</td>
+                                        <td class="text-capitalize">{{ $order->order_description }}</td>
+                                        <td class="text-capitalize">{{ $order->status }}</td>
+                                        <td>
+                                            <span> -- </span>
+                                        </td>
+                                    </tr>
+                                    @elseif($order->status == 'denied')
+                                    <tr style="background: #f23557; color: #fff">
+                                        <td><a href="" style="color: #fff">{{ $order->buyer->name }}</a></td>
+                                        <td class="text-capitalize">{{ $order->buyer->phone_number }}</td>
+                                        <td class="text-capitalize">{{ $order->order_description }}</td>
+                                        <td class="text-capitalize">{{ $order->status }}</td>
+                                        <td>
+                                            <span> -- </span>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @empty
+                                    <tr>
+                                        <td colspan="2">You Didn't Hire Any Seller Yet</td>
+                                    </tr>
+                                @endforelse
+                            </table>
+                        </div>
                 </div>
             </div>
         </div>
