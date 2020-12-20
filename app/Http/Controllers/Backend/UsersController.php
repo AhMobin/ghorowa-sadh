@@ -57,6 +57,11 @@ class UsersController extends Controller
     }
 
 
+    public function updateSuperProfile(){
+        return view('backend.admin_update');
+    }
+
+
     public function profileUpdate(Request $request){
         $host = $_SERVER['HTTP_HOST'];
         if($request->hasFile('avatar')){
@@ -95,6 +100,51 @@ class UsersController extends Controller
             'name' => $request->name,
             'phone_number' => $request->phone_number,
             'type' => $request->type,
+        ]);
+
+        session()->flash('success','Successfully Profile Updated');
+        return back();
+    }
+
+
+    public function adminProfileUpdate(Request $request){
+        $host = $_SERVER['HTTP_HOST'];
+        
+        if($request->hasFile('avatar')){
+            if(Auth::user()->avatar){
+                $oldAvatar = $request->oldAvatar;
+                $getoldAvatar = explode('/',$oldAvatar);
+                $lastgetoldAvatar = 'public/users/avatar/'.end($getoldAvatar);
+                Storage::delete($lastgetoldAvatar);
+    
+                $avatarPath = $request->file('avatar')->store('public/users/avatar');
+                $avatarPathOne = explode('/',$avatarPath)[1];
+                $avatarPathTwo = explode('/',$avatarPath)[2];
+                $avatarPathThree = explode('/',$avatarPath)[3];
+    
+                $avatarLocation = "http://".$host."/storage/".$avatarPathOne."/".$avatarPathTwo."/".$avatarPathThree;
+
+                User::where('id',Auth::id())->update([
+                    'avatar' => $avatarLocation,
+                ]);
+            
+            }else{
+                $userImage = $request->file('avatar')->store('public/users/avatar');
+                $imgPathOne = explode('/',$userImage)[1];
+                $imgPathTwo = explode('/',$userImage)[2];
+                $imgPathThree = explode('/',$userImage)[3];
+                $avatarLocation = "http://".$host."/storage/".$imgPathOne."/".$imgPathTwo."/".$imgPathThree;
+                
+                User::where('id',Auth::id())->update([
+                    'avatar' => $avatarLocation,
+                ]);
+            
+            }
+        }
+
+        $update = User::where('id',Auth::id())->update([
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
         ]);
 
         session()->flash('success','Successfully Profile Updated');

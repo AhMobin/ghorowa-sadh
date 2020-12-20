@@ -1,12 +1,12 @@
 @extends('backend.layout.master')
-@section('title','Category')
+@section('title','Admin Panel')
 
 @section('main')
 
 <div class="container">
     <div class="row">
         <div class="col-md-12 p-5">
-            Welcome to your panel! <br><br>
+            Welcome to Admin panel! <br><br>
             
             <table class="table table-striped table-bordered table-hover w-50">
                 <tr>
@@ -22,6 +22,8 @@
                     <td>{{ Auth::user()->phone_number }}</td>
                 </tr>
             </table>
+
+            <a href="{{ url('update') }}" class="btn btn-sm btn-purple">Edit Profile</a>
         </div>
     </div>
 </div>

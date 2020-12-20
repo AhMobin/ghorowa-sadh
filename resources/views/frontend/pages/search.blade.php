@@ -4,7 +4,7 @@
 
 
 <section class="seller_profile mt-5">
-    <h3 class="text-center section_heading">Search result for {{ $search }}</h3>
+    <h3 class="text-center section_heading">Search result for "{{ $search }}"</h3>
     <div class="container">
         
         <div class="row">
@@ -20,8 +20,8 @@
                     </div>
                 </div>
             @empty
-                <div class="col-12">
-                    <h3 style="color: red">No Result</h3>
+                <div class="col-12 mt-5">
+                    <h3 style="color: red">Did not match with any category like "{{ $search }}"</h3>
                 </div>
             @endforelse
 
