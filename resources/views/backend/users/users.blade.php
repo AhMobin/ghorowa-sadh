@@ -29,7 +29,7 @@
                         <th class="th-sm">Email Address</th>
                         <th class="th-sm">User Type</th>
                         <th class="th-sm">Avatar</th>
-                        <th class="th-sm">Actions</th>
+                        {{-- <th class="th-sm">Actions</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -41,11 +41,10 @@
                         <th class="th-sm">{{ $user->email }}</th>
                         <th class="th-sm">{{ $user->type }}</th>
                         <th class="th-sm"><img src="{{ $user->avatar }}" width="75" alt=""></th>
-                        <th class="th-sm">
-                            <a href=""><i class="fa fa-eye"></i></a>
-                            <a href=""><i class="fa fa-edit px-2"></i></a>
-                            <a href=""><i class="fa fa-trash"></i></a>
-                        </th>
+                        {{-- <th class="th-sm"> --}}
+                            {{-- <a href=""><i class="fa fa-eye"></i></a> --}}
+                            {{-- <a href=""><i class="fa fa-trash ml-5"></i></a> --}}
+                        {{-- </th> --}}
                     </tr>
                     @endforeach	
                 </tbody>

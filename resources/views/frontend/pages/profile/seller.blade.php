@@ -22,7 +22,7 @@
 
                             {{-- <a href="" class="btn btn-success w-75 btn-sm">Contact Me</a> --}}
                             <hr>
-                                @if($user->name_uri == Auth::user()->name_uri && $checkSkills > 0)
+                                @if($user->name_uri == Auth::user()->name_uri)
                                 <a href="{{ url('update/profile/'.$user->name_uri) }}" class="btn btn-warning w-75 btn-sm mb-3">Edit Profile</a>
                                 @endif
                         </div>
@@ -155,7 +155,7 @@
                                     @endif
                                 @empty
                                     <tr>
-                                        <td colspan="2">No Order Placed</td>
+                                        <td colspan="5">No Order Placed</td>
                                     </tr>
                                 @endforelse
                             </table>

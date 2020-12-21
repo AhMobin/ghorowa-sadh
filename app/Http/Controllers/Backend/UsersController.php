@@ -36,7 +36,7 @@ class UsersController extends Controller
                 $skills = SellerSkill::where('user_id',Auth::id())->get();
                 return view('frontend.pages.profile.seller',compact('user','checkSkills','categories','skills','portfolios','orders'));
             }else{
-                return view('frontend.pages.profile.seller',compact('user','checkSkills','categories'));
+                return view('frontend.pages.profile.seller',compact('user','checkSkills','categories','portfolios','orders'));
             }
             
         }else if($user->type == 'buyer'){
@@ -174,7 +174,8 @@ class UsersController extends Controller
     public function addSkills(Request $request){
         $skills = $request->category_slug;
 
-        if(count($skills) >= 6){
+        // if(count($skills) >= 6){
+        if(is_countable($skills) && count($skills) > 6){
             session()->flash('warning','Cannot Add More Than Six Skills Category');
             return back();
         }else{

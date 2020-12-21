@@ -91,7 +91,7 @@
                                     @endif
                                 @empty
                                     <tr>
-                                        <td colspan="2">You Didn't Hire Any Seller Yet</td>
+                                        <td colspan="5">You Didn't Hire Any Seller Yet</td>
                                     </tr>
                                 @endforelse
                             </table>
