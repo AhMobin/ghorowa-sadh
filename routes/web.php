@@ -54,8 +54,10 @@ Route::post('update/user/description', [UsersController::class,'updateDescriptio
 Route::post('add/skills', [UsersController::class,'addSkills']);
 Route::post('add/portfolio', [UsersController::class,'addPortfolio']);
 
-
 Route::get('categories',[CategoryController::class,'index'])->name('category')->middleware(['auth']);
+Route::get('category/edit/{slug}',[CategoryController::class,'editCategory'])->middleware(['auth']);
+Route::post('update/category/{slug}',[CategoryController::class,'updateCategory'])->middleware(['auth']);
+Route::get('category/remove/{slug}',[CategoryController::class,'removeCategory'])->middleware(['auth']);
 Route::post('category/store',[CategoryController::class,'store'])->name('category.store')->middleware(['auth']);
 
 Route::get('all/users',[UsersController::class,'allUsers'])->name('users');

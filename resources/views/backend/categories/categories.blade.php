@@ -4,22 +4,35 @@
 @section('main')
 
 <div class="container">
+
     <div class="row">
         <button class="btn btn-sm btn-primary ml-5" data-toggle="modal" data-target="#addNewCategoryModel">Add New Category</button>
         <div class="col-md-12 p-5">
             <h5>List of All Categories</h5><br>
-
+            
             @if(session()->has('success'))
                 <div class="alert alert-success" role="alert">
                     {{ session()->get('success') }}
                 </div>
-
+        
             @elseif(session()->has('warning'))  
                 <div class="alert alert-warning" role="alert">
                     {{ session()->get('warning') }}
                 </div>
+        
+            @elseif(session()->has('update_category'))  
+                <div class="alert alert-success" role="alert">
+                    {{ session()->get('update_category') }}
+                </div>
+        
+            @elseif(session()->has('update_removed'))  
+                <div class="alert alert-warning" role="alert">
+                    {{ session()->get('update_removed') }}
+                </div>
+                    
             @endif
 
+            
             <table class="table table-striped table-sm text-center table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
