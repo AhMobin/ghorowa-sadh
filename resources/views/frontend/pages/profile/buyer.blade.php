@@ -38,7 +38,7 @@
                                 @forelse($orders as $order)
                                 @if($order->status == 'requested')
                                     <tr style="background: #62929a; color: #fff">
-                                        <td><a href="{{ url('profile/'.$order->seller->name_uri) }}" style="color: #fff">{{ $order->buyer->name }}</a></td>
+                                        <td><a href="{{ url('profile/'.$order->seller->name_uri) }}" style="color: #fff">{{ $order->seller->name }}</a></td>
                                         <td class="text-capitalize">{{ $order->seller->phone_number }}</td>
                                         <td class="text-capitalize">{{ $order->order_description }}</td>
                                         <td class="text-capitalize">{{ $order->status }}</td>

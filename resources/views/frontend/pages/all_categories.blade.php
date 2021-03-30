@@ -11,7 +11,7 @@
             @foreach($categories as $category)
 
                 <div class="col-md-3 col-lg-3 col-sm-6 col-12">
-                    <a href="{{ 'all/sellers/'.$category->category_slug }}">
+                    <a href="{{ url('all/sellers/'.$category->category_slug) }}">
                         <div class="card">
                             <img class="card-img-top" src="{{ $category->category_thumb }}" alt="">
                             <div class="card-body">

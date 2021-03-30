@@ -42,28 +42,16 @@
               
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">About</a>
-                    </li>
-                    {{-- <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Our Categories
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach(App\Models\Category::select('category_name','category_slug')->get() as $category)
-                          <a class="dropdown-item" href="{{ url('all/sellers/'.$category->category_slug) }}">{{ $category->category_name }}</a>
-                        @endforeach
-                      </div>
-                    </li> --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blogs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Support</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          @foreach(App\Models\Category::select('category_name','category_slug')->get() as $category)
+                            <a class="dropdown-item" href="{{ url('all/sellers/'.$category->category_slug) }}">{{ $category->category_name }}</a>
+                          @endforeach
+                        </div>
+                      </li>
                   </ul>
 
                   <form class="form-inline ml-4 my-2 my-lg-0" method="GET" action="{{ url('search') }}" style="margin-right: 20px;">

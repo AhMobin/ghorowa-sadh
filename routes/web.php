@@ -29,7 +29,7 @@ Route::get('/',[PageController::class,'index'])->name('index');
 Route::get('all/categories',[PageController::class,'categories'])->name('all.category');
 Route::get('/profile/{user}', [PageController::class,'userProfile']);
 
-Route::get('all/sellers/{category}',[PageController::class,'categorySellers']);
+Route::get('all/sellers/{category}',[PageController::class,'categorySellers'])->name('single.category.sellers');
 
 Route::get('message/to/seller/',[PageController::class,'messageToSeller']);
 

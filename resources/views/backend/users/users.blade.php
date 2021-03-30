@@ -5,9 +5,8 @@
 
 <div class="container">
     <div class="row">
-        <button class="btn btn-sm btn-primary ml-5" data-toggle="modal" data-target="#addNewUserModel">Add New User</button>
         <div class="col-md-12 p-5">
-            <h5>List of All Categories</h5><br>
+            <h5>List of All Users</h5><br>
 
             @if(session()->has('success'))
                 <div class="alert alert-success" role="alert">
