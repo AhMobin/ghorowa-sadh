@@ -4,15 +4,15 @@ Home made is a online platform where buyer can hire a seller to make/serve homes
 
 ## Project Installation
 
--[Before Install the application you must have php, composer and any sql client in your computer.]
+-Before Install the application you must have php, composer and any sql client in your computer.
 
--[Install all dependancies by running 'composer install' command]
+-Install all dependancies by running 'composer install' command
 
--[Create MySQL database named 'home_made'.]
+-Create MySQL database named 'home_made'.
 
--[Migrate tables by running 'php artisan migrate --seed' command.]
+-Migrate tables by running 'php artisan migrate --seed' command.
 
--[Serve the application by running 'php artisan serve']
+-Serve the application by running 'php artisan serve'
 
 ## Admin Login
 
